@@ -3,11 +3,11 @@
 
 class DBO
 {
-    public $host = '127.0.0.1';
-    public $db   = 'currency';
-    public $user = 'root';
-    public $pass = '5287363_Maxim';
-    public $charset = 'utf8';
+    private $host;
+    private $db   = 'currency';
+    private $user = 'root';
+    private $pass = '5287363_Maxim';
+    private $charset = 'utf8';
 
     private static $dbo;
 

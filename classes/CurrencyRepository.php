@@ -1,5 +1,8 @@
 <?php
 
+
+require_once 'CurrencyRepositoryInterface.php';
+
 /**
  * Class CurrencyRepository
  */
@@ -19,13 +22,13 @@ class CurrencyRepository implements CurrencyRepositoryInterface
         $this->pdo = $pdo;
     }
 
-
     /**
      * @inheritDoc
      */
     public function findAll()
     {
         // TODO: Implement findAll() method.
+        return $this->pdo->query('SELECT * FROM Currency')->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -33,7 +36,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
      */
     public function find($id)
     {
-        // TODO: Implement find() method.
+        return $this->pdo->query('SELECT * FROM Currency WHERE Cur_ID = ' . $id)->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -41,7 +44,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
      */
     public function saveOne($currency)
     {
-        // TODO: Implement saveOne() method.
+        
     }
 
     /**
@@ -49,7 +52,10 @@ class CurrencyRepository implements CurrencyRepositoryInterface
      */
     public function save($currencies)
     {
-        // TODO: Implement save() method.
+        /** @var Currency $currency */
+        foreach ($currencies as $currency) {
+            $this->saveOne($currency);
+        }
     }
 
     /**

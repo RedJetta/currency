@@ -10,30 +10,6 @@ class Currency
     private $Cur_Name;
     private $Cur_OfficialRate;
 
-//    /**
-//     * @param $pdo
-//     * @return mixed
-//     */
-//    public function getCurAbbreviation($pdo)
-//    {
-//        $this->Cur_Abbreviation = $pdo->query('SELECT Cur_Abbreviation FROM Currency')->fetchAll(PDO::FETCH_COLUMN);
-//        return $this->Cur_Abbreviation;
-//    }
-//
-//    public function getAll($pdo)
-//    {
-//
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getCurOfficialRate($pdo)
-//    {
-//        $this->Cur_Abbreviation = $pdo->query('SELECT Cur_OfficialRate FROM Currency')->fetchAll(PDO::FETCH_COLUMN);
-//        return $this->Cur_OfficialRate;
-//    }
-
     /**
      * @return mixed
      */
@@ -105,6 +81,43 @@ class Currency
         $this->Cur_Name = $Cur_Name;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCurAbbreviation()
+    {
+        return $this->Cur_Abbreviation;
+    }
+
+    /**
+     * @param mixed $Cur_Abbreviation
+     * @return Currency
+     */
+    public function setCurAbbreviation($Cur_Abbreviation)
+    {
+        $this->Cur_Abbreviation = $Cur_Abbreviation;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCurOfficialRate()
+    {
+        return $this->Cur_OfficialRate;
+    }
+
+    /**
+     * @param mixed $Cur_OfficialRate
+     * @return Currency
+     */
+    public function setCurOfficialRate($Cur_OfficialRate)
+    {
+        $this->Cur_OfficialRate = $Cur_OfficialRate;
+        return $this;
+    }
+
 
 }
 //$q = intval($_GET['q']);

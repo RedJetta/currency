@@ -1,5 +1,7 @@
 <?php
 
+require_once 'RepositoryInterface.php';
+
 /**
  * Interface CurrencyRepositoryInterface
  */
