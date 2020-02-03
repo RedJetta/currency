@@ -9,13 +9,52 @@ class DBO
     public $pass = '5287363_Maxim';
     public $charset = 'utf8';
 
-    public function DatabaseConnection()
+    private static $dbo;
+
+    /**
+     * DBO constructor.
+     * @param string $host
+     * @param string $db
+     * @param string $user
+     * @param string $pass
+     * @param string $charset
+     */
+    private function __construct($host, $db, $user, $pass, $charset)
+    {
+        $this->host = $host;
+        $this->db = $db;
+        $this->user = $user;
+        $this->pass = $pass;
+        $this->charset = $charset;
+    }
+
+    /**
+     * @param $host
+     * @param $db
+     * @param $user
+     * @param $pass
+     * @param $charset
+     * @return DBO
+     */
+    public static function getInstance($host, $db, $user, $pass, $charset)
+    {
+        if (self::$dbo) {
+            return self::$dbo;
+        }
+
+        self::$dbo = new DBO($host, $db, $user, $pass, $charset);
+
+        return self::$dbo;
+    }
+
+
+    private function databaseConnection()
     {
         $dsn = "mysql:host={$this->host};dbname={$this->db};charset={$this->charset}";
         return $dsn;
     }
 
-    public function DBOOptions()
+    private function dboOptions()
     {
         $opt = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -25,12 +64,16 @@ class DBO
         return $opt;
     }
 
-    public function createPDO(){
+    /**
+     * @return PDO
+     */
+    public function createPDO()
+    {
         $pdo = new PDO($this->DatabaseConnection(), $this->user, $this->pass, $this->DBOOptions());
         return $pdo;
     }
 
-    public function InsertCurrency($decodedData){
+    public function saveCurrency($decodedData){
         foreach ($decodedData as $item) {
             $Cur_ID = $item['Cur_ID'];
             $Cur_Abbreviation = $item['Cur_Abbreviation'];
