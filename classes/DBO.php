@@ -25,8 +25,12 @@ class DBO
         return $opt;
     }
 
-    public function InsertCurrency($decodedData){
+    public function createPDO(){
         $pdo = new PDO($this->DatabaseConnection(), $this->user, $this->pass, $this->DBOOptions());
+        return $pdo;
+    }
+
+    public function InsertCurrency($decodedData){
         foreach ($decodedData as $item) {
             $Cur_ID = $item['Cur_ID'];
             $Cur_Abbreviation = $item['Cur_Abbreviation'];
@@ -43,11 +47,13 @@ class DBO
             debug($data2);
             try {
                 $sql = "INSERT INTO Currency (Cur_ID, Cur_Abbreviation, Cur_Scale, Cur_Name, Cur_OfficialRate) VALUES (:Cur_ID,:Cur_Abbreviation,:Cur_Scale,:Cur_Name, :Cur_OfficialRate)";
-                $pdo->prepare($sql)->execute($data2);
+                $this->createPDO()->prepare($sql)->execute($data2);
             } catch (Exception $e) {
                 var_dump($e->getMessage());exit();
             }
 
         }
+
     }
+
 }

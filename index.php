@@ -15,9 +15,20 @@ $var->decodeData();
 
 
 $var1 = new DBO();
-$var1->DatabaseConnection();
-$var1->InsertCurrency($var->decodeData());
+$var1->user;
+$var1->pass;
+$var1->createPDO();
+//$var1->InsertCurrency($var->decodeData());
 debug($var1);
 
+$var2 = new Currency();
+$var2->getCurAbbreviation($var1->createPDO());
+
+debug($var2);
+
 $currency = new Currency();
+
+
 ?>
+
+
